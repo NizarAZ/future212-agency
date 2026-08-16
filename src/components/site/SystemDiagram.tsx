@@ -13,7 +13,7 @@ export function SystemDiagram() {
     { x: 440, y: 310, label: "Reports" },
   ];
 
-  const edges = [
+  const edges: Array<[number, number]> = [
     [0, 3],
     [1, 3],
     [2, 3],
@@ -59,8 +59,8 @@ export function SystemDiagram() {
         <circle cx="250" cy="200" r="120" fill="url(#f212-core)" />
 
         {edges.map(([a, b], i) => {
-          const from = nodes[a];
-          const to = nodes[b];
+          const from = nodes[a]!;
+          const to = nodes[b]!;
           const mid = (from.x + to.x) / 2;
           const d = `M ${from.x} ${from.y} C ${mid} ${from.y}, ${mid} ${to.y}, ${to.x} ${to.y}`;
           return (
