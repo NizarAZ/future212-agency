@@ -20,7 +20,7 @@ export type ConsultationPayload = {
   name: string;
   company: string;
   email: string;
-  website?: string;
+  website?: string | undefined;
   automationGoal: string;
   preferredContact: "email" | "call" | "whatsapp";
   submittedAt: string;
