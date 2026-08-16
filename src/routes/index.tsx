@@ -1,24 +1,55 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/site/Navbar";
+import { Hero } from "@/components/site/Hero";
+import { Problems } from "@/components/site/Problems";
+import { Services } from "@/components/site/Services";
+import { UseCases } from "@/components/site/UseCases";
+import { Process } from "@/components/site/Process";
+import { Why } from "@/components/site/Why";
+import { Technology } from "@/components/site/Technology";
+import { SystemDiagram } from "@/components/site/SystemDiagram";
+import { Faq } from "@/components/site/Faq";
+import { Consultation } from "@/components/site/Consultation";
+import { FinalCta } from "@/components/site/FinalCta";
+import { Footer } from "@/components/site/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const description =
+  "Future212 designs and builds automation and AI systems around your actual processes — lead handling, customer support, operations and data flow — engineered for reliability and measurable outcomes.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Future212 — Automation & AI systems, engineered for reliability" },
+      { name: "description", content: description },
+      { property: "og:title", content: "Future212 — Automation & AI systems, engineered for reliability" },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Future212 — Automation & AI systems, engineered for reliability" },
+      { name: "twitter:description", content: description },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <Problems />
+        <Services />
+        <UseCases />
+        <SystemDiagram />
+        <Process />
+        <Why />
+        <Technology />
+        <Faq />
+        <Consultation />
+        <FinalCta />
+      </main>
+      <Footer />
+    </>
   );
 }
