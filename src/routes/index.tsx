@@ -7,7 +7,6 @@ import { UseCases } from "@/components/site/UseCases";
 import { Process } from "@/components/site/Process";
 import { Why } from "@/components/site/Why";
 import { Technology } from "@/components/site/Technology";
-import { SystemDiagram } from "@/components/site/SystemDiagram";
 import { Faq } from "@/components/site/Faq";
 import { Consultation } from "@/components/site/Consultation";
 import { FinalCta } from "@/components/site/FinalCta";
@@ -41,7 +40,6 @@ function Index() {
         <Problems />
         <Services />
         <UseCases />
-        <SystemDiagram />
         <Process />
         <Why />
         <Technology />
