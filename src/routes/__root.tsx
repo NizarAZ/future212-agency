@@ -77,14 +77,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Future212 — Automation & AI systems, engineered for reliability" },
+      {
+        name: "description",
+        content:
+          "Future212 designs and builds automation and AI systems around your actual processes — engineered for reliability and measurable outcomes.",
+      },
+      { name: "author", content: "Future212" },
+      { property: "og:title", content: "Future212 — Automation & AI systems, engineered for reliability" },
+      {
+        property: "og:description",
+        content:
+          "Future212 designs and builds automation and AI systems around your actual processes — engineered for reliability and measurable outcomes.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
