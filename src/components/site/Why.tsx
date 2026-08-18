@@ -10,7 +10,7 @@ export function Why() {
           <SectionHeading
             eyebrow="Why Future212"
             title={<>An implementation partner, not a tool vendor.</>}
-            intro="We are accountable for whether the system works in production — not for how many workflows we shipped."
+            intro="We are accountable for whether the system works in production, not for how many workflows we shipped."
           />
 
           <Reveal delay={120} className="mt-12 panel p-8">

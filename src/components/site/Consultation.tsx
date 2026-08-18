@@ -25,7 +25,7 @@ const schema = z.object({
     .string()
     .trim()
     .min(20, "A sentence or two helps us prepare properly."),
-  preferredContact: z.enum(["email", "call", "whatsapp"]),
+  preferredContact: z.enum(["email", "whatsapp"]),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -213,7 +213,6 @@ export function Consultation() {
                 {(
                   [
                     ["email", "Email"],
-                    ["call", "Call"],
                     ["whatsapp", "WhatsApp"],
                   ] as const
                 ).map(([value, label]) => (

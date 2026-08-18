@@ -6,25 +6,26 @@ import { Services } from "@/components/site/Services";
 import { UseCases } from "@/components/site/UseCases";
 import { Process } from "@/components/site/Process";
 import { Why } from "@/components/site/Why";
-import { Technology } from "@/components/site/Technology";
 import { Faq } from "@/components/site/Faq";
 import { Consultation } from "@/components/site/Consultation";
 import { FinalCta } from "@/components/site/FinalCta";
 import { Footer } from "@/components/site/Footer";
 
 const description =
-  "Future212 designs and builds automation and AI systems around your actual processes — lead handling, customer support, operations and data flow — engineered for reliability and measurable outcomes.";
+  "Future212 builds AI automation that runs your repetitive work for you — customer support, lead generation, invoicing, social media, data entry and complex workflows — inside the tools you already use. Watch a real task run, then book a free consultation.";
+
+const title = "Future212 — Watch your repetitive work run itself";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Future212 — Automation & AI systems, engineered for reliability" },
+      { title },
       { name: "description", content: description },
-      { property: "og:title", content: "Future212 — Automation & AI systems, engineered for reliability" },
+      { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Future212 — Automation & AI systems, engineered for reliability" },
+      { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
     ],
   }),
@@ -42,7 +43,6 @@ function Index() {
         <UseCases />
         <Process />
         <Why />
-        <Technology />
         <Faq />
         <Consultation />
         <FinalCta />

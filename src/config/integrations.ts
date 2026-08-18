@@ -22,7 +22,7 @@ export type ConsultationPayload = {
   email: string;
   website?: string | undefined;
   automationGoal: string;
-  preferredContact: "email" | "call" | "whatsapp";
+  preferredContact: "email" | "whatsapp";
   submittedAt: string;
   source: "future212.pro";
 };

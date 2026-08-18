@@ -3,13 +3,16 @@ export function Wordmark({ compact = false }: { compact?: boolean }) {
     <span className="flex items-center gap-2.5">
       <span
         aria-hidden="true"
-        className="relative grid size-8 place-items-center border border-gold/50"
+        className="relative grid size-8 place-items-center overflow-hidden"
       >
-        <span className="block size-2.5 rotate-45 bg-gold" />
-        <span className="absolute inset-x-1.5 top-1/2 h-px bg-gold/35" />
+        <img
+          src="/logo.png"
+          alt=""
+          className="absolute left-1/2 top-1/2 h-[200%] w-[200%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
+        />
       </span>
       <span className="font-display text-xl leading-none tracking-tight text-foreground">
-        Future<span className="text-gold-gradient">212</span>
+        ＦＵＴＵＲＥ<span className="text-gold-gradient">２１２</span>
       </span>
       {!compact && <span className="sr-only">AI automation agency</span>}
     </span>
