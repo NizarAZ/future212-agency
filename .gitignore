@@ -30,3 +30,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local AI tooling (Claude Code, agents, skills)
+.agents/
+.claude/
+.freebuff/
+skills-lock.json
