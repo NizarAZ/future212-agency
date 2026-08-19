@@ -3,7 +3,6 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { Problems } from "@/components/site/Problems";
 import { Services } from "@/components/site/Services";
-import { UseCases } from "@/components/site/UseCases";
 import { Process } from "@/components/site/Process";
 import { Why } from "@/components/site/Why";
 import { Faq } from "@/components/site/Faq";
@@ -40,7 +39,6 @@ function Index() {
         <Hero />
         <Problems />
         <Services />
-        <UseCases />
         <Process />
         <Why />
         <Faq />
