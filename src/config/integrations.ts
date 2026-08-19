@@ -13,7 +13,7 @@ export const CONSULTATION_WEBHOOK_URL: string =
 
 export const isConsultationEndpointConfigured = CONSULTATION_WEBHOOK_URL.length > 0;
 
-export const CONTACT_EMAIL = "hello@future212.pro";
+export const CONTACT_EMAIL = "support@future212.pro";
 
 /** Shape posted to the webhook. */
 export type ConsultationPayload = {

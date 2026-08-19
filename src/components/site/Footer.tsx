@@ -1,3 +1,4 @@
+import { Instagram } from "lucide-react";
 import { CONTACT_EMAIL } from "@/config/integrations";
 import { navItems } from "@/data/site";
 import { Wordmark } from "./Wordmark";
@@ -49,9 +50,20 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-hairline pt-8 text-xs text-foreground/40 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-hairline pt-8 text-xs text-foreground/40 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Future212. All rights reserved.</p>
-          <p>AI · Automation · Integrations · Intelligent Workflows</p>
+          <div className="flex items-center gap-5">
+            <p>AI · Automation · Integrations · Intelligent Workflows</p>
+            <a
+              href="https://www.instagram.com/future212.pro/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Future212 on Instagram"
+              className="text-foreground/50 transition-colors hover:text-gold"
+            >
+              <Instagram className="size-4" aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
