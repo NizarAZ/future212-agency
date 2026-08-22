@@ -1,15 +1,27 @@
 /**
  * INTEGRATION POINT — consultation requests.
  *
- * The consultation form posts a JSON payload to this endpoint.
- * Set VITE_CONSULTATION_WEBHOOK_URL to your n8n Production Webhook URL
- * (Webhook node → POST → "Respond immediately") to activate submissions.
+ * The consultation form posts a JSON payload to this endpoint: the n8n
+ * "Future212 — Consultation Intake" workflow, which acknowledges immediately,
+ * then triages, qualifies, logs to Sheets, alerts Telegram, and emails the
+ * visitor a confirmation.
  *
- * Until it is configured the form validates input and tells the visitor to
- * email instead — it never fakes a successful submission.
+ * This URL is deliberately committed rather than kept in an env var. Vite
+ * inlines every VITE_* value into the public client bundle at build time, so
+ * an env var would be equally readable by anyone viewing source — it would buy
+ * no secrecy, only the risk of the form silently going dead if the variable is
+ * ever missing from an environment. Set VITE_CONSULTATION_WEBHOOK_URL to
+ * override (e.g. to point a preview build at a test workflow).
  */
+const DEFAULT_CONSULTATION_WEBHOOK_URL =
+  "https://n8n.nizarai.xyz/webhook/future212-consultation";
+
+const envWebhookUrl = (
+  import.meta.env["VITE_CONSULTATION_WEBHOOK_URL"] as string | undefined
+)?.trim();
+
 export const CONSULTATION_WEBHOOK_URL: string =
-  (import.meta.env["VITE_CONSULTATION_WEBHOOK_URL"] as string | undefined) ?? "";
+  envWebhookUrl || DEFAULT_CONSULTATION_WEBHOOK_URL;
 
 export const isConsultationEndpointConfigured = CONSULTATION_WEBHOOK_URL.length > 0;
 
