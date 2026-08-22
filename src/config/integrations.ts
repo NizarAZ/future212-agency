@@ -22,7 +22,8 @@ export type ConsultationPayload = {
   email: string;
   website?: string | undefined;
   automationGoal: string;
-  preferredContact: "email" | "whatsapp";
+  /** E.164 (`+` + digits). Optional — present only when the visitor supplied a number. */
+  phone?: string | undefined;
   submittedAt: string;
   source: "future212.pro";
 };

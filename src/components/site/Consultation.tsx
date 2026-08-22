@@ -11,6 +11,11 @@ import { Reveal } from "./Reveal";
 import { Section, SectionHeading } from "./Section";
 import { cn } from "@/lib/utils";
 
+/** Strip formatting so we validate/store just the dialable characters. */
+const stripPhone = (value: string) => value.replace(/[\s()\-.]/g, "");
+/** E.164-style: optional leading +, 8–15 digits, no leading zero. */
+const phonePattern = /^\+?[1-9]\d{7,14}$/;
+
 const schema = z.object({
   name: z.string().trim().min(2, "Please enter your name."),
   company: z.string().trim().min(2, "Please enter your business name."),
@@ -25,7 +30,15 @@ const schema = z.object({
     .string()
     .trim()
     .min(20, "A sentence or two helps us prepare properly."),
-  preferredContact: z.enum(["email", "whatsapp"]),
+  // Optional, but if given it must be dialable — we may reply here or on WhatsApp.
+  phone: z
+    .string()
+    .trim()
+    .optional()
+    .or(z.literal(""))
+    .refine((value) => !value || phonePattern.test(stripPhone(value)), {
+      message: "Enter a valid number with country code, e.g. +1 555 123 4567.",
+    }),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -37,7 +50,7 @@ const initial: FormValues = {
   email: "",
   website: "",
   automationGoal: "",
-  preferredContact: "email",
+  phone: "",
 };
 
 const fieldClass =
@@ -74,9 +87,14 @@ export function Consultation() {
     }
 
     setStatus("sending");
+    // Phone is optional; when given, normalize to E.164 (`+` + digits).
+    const phone = parsed.data.phone
+      ? `+${stripPhone(parsed.data.phone).replace(/^\+/, "")}`
+      : undefined;
     const payload: ConsultationPayload = {
       ...parsed.data,
       website: parsed.data.website || undefined,
+      phone,
       submittedAt: new Date().toISOString(),
       source: "future212.pro",
     };
@@ -175,18 +193,33 @@ export function Consultation() {
                   onChange={(e) => set("email", e.target.value)}
                 />
               </Field>
-              <Field id="website" label="Website" optional error={errors.website}>
+              <Field id="phone" label="Phone / WhatsApp" optional error={errors.phone}>
                 <input
-                  id="website"
-                  name="website"
-                  autoComplete="url"
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   className={fieldClass}
-                  placeholder="company.com"
-                  value={values.website ?? ""}
-                  onChange={(e) => set("website", e.target.value)}
+                  placeholder="+1 555 123 4567"
+                  value={values.phone ?? ""}
+                  aria-invalid={!!errors.phone}
+                  onChange={(e) => set("phone", e.target.value)}
                 />
               </Field>
             </div>
+
+            <Field id="website" label="Website" optional error={errors.website}>
+              <input
+                id="website"
+                name="website"
+                autoComplete="url"
+                className={fieldClass}
+                placeholder="company.com"
+                value={values.website ?? ""}
+                onChange={(e) => set("website", e.target.value)}
+              />
+            </Field>
 
             <Field
               id="automationGoal"
@@ -205,39 +238,10 @@ export function Consultation() {
               />
             </Field>
 
-            <fieldset>
-              <legend className="mb-3 text-xs tracking-[0.18em] text-foreground/55 uppercase">
-                Preferred contact method
-              </legend>
-              <div className="flex flex-wrap gap-3">
-                {(
-                  [
-                    ["email", "Email"],
-                    ["whatsapp", "WhatsApp"],
-                  ] as const
-                ).map(([value, label]) => (
-                  <label
-                    key={value}
-                    className={cn(
-                      "cursor-pointer rounded-sm border px-5 py-2.5 text-sm transition-colors",
-                      values.preferredContact === value
-                        ? "border-gold bg-gold/12 text-gold"
-                        : "border-border text-foreground/70 hover:border-gold/40",
-                    )}
-                  >
-                    <input
-                      type="radio"
-                      name="preferredContact"
-                      value={value}
-                      className="sr-only"
-                      checked={values.preferredContact === value}
-                      onChange={() => set("preferredContact", value)}
-                    />
-                    {label}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+            <p className="text-xs text-foreground/45">
+              Include your country code on the number — we&rsquo;ll reply by email, and on WhatsApp
+              too if you left one.
+            </p>
 
             <button
               type="submit"
